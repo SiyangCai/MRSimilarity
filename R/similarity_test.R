@@ -94,7 +94,7 @@ MR_similarity_analysis <- function(data,
   # iterate through each method name and convert into the function string
   # stored in TwoSampleMR::mr_method_list
   # convert the obj column to a list then assign the name string using names
-  mr_methods <- mr_method_list()
+  mr_methods <- TwoSampleMR::mr_method_list()
 
   mr_methods.list <- as.list(mr_methods$obj)
   names(mr_methods.list) <- mr_methods$name
@@ -251,8 +251,6 @@ MR_similarity_analysis <- function(data,
   # compute correlation matrix for the output objects
   C1 = cor(M.boot2)
 
-
-
   # calculation
 
   ests.M <- matrix(nrow = 1, ncol = n.est)
@@ -271,7 +269,7 @@ MR_similarity_analysis <- function(data,
   cov.mat = diag(as.numeric(SE)) %*% C1 %*% diag(as.numeric(SE))
 
   # implement PCA before calculating Q_sim p-values to report
-  Q.sim.PCA <- PCA_scenarios(SE, M.boot = M.boot1, ests.M = ests.M,
+  Q.sim.PCA <- PCA_scenarios(SE, M.boot = M.boot1, ests.M = ests.M, groupwise = groupwise,
                                          threshold = PC.threshold)
 
   # extract Bonferroni correction ascertained from PCA of Q_sim cov matrix
@@ -315,7 +313,7 @@ MR_similarity_analysis <- function(data,
                                              ests.M[1, ind.vals],
                                              Bonf.corr = Bonf.corr,
                                              Q.stat.out = TRUE,
-                                             Bonf.corr.strict = ifelse(groupwise, sum(choose(n.est, 2:n.est)) , choose(n.est,2)))
+                                             Bonf.corr.strict = ifelse(groupwise, sum(choose(n.est, 2:n.est)), choose(n.est,2)))
 
       # extract p-values
       Q.pvals <- Q.pvals.res$p.sim.vec

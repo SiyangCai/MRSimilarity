@@ -1,4 +1,4 @@
-PCA_scenarios <- function(SE, M.boot, ests.M, threshold = 0.95) {
+PCA_scenarios <- function(SE, M.boot, ests.M, groupwise = FALSE, threshold = 0.95) {
 
   # extract size of bootstrap matrix
   n.boot <- nrow(M.boot)
@@ -22,8 +22,10 @@ PCA_scenarios <- function(SE, M.boot, ests.M, threshold = 0.95) {
 
   for (j in 2:n.est) {
 
-    if(j != 2 && j != n.est){
-      next
+    if(groupwise == FALSE){
+      if(j != 2 && j != n.est){
+        next
+      }
     }
 
     # stack combination sets for each j
@@ -69,11 +71,12 @@ PCA_scenarios <- function(SE, M.boot, ests.M, threshold = 0.95) {
         Q.sim.res <- calculate_similarity_Q_stat(SE[ind.vals], cor(M.boot)[ind.vals, ind.vals],
                                              M.boot[, ind.vals],
                                              ests.M.sub[1, ind.vals],
-                                             Q.stat.out = TRUE)
+                                             Q.stat.out = TRUE,
+                                             Bonf.corr.strict = ifelse(groupwise, sum(choose(n.est, 2:n.est)), choose(n.est,2)))
         #Q.pvals.sub <- Q.sim.res$p.sim
         # only interested in Q_sim1 form for this area
         #print(Q.sim.res)
-        Q.stat.i.sub[l] <- Q.sim.res$Q.sim.df["Q.1", "Q.stat"]
+        Q.stat.i.sub[l] <- Q.sim.res$Q.sim.df["Q statistics", "Q.stat"]
       }
 
 
