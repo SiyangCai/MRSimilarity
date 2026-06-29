@@ -14,8 +14,10 @@ install_github("SiyangCai/MRSimilarity")
 ```
 
 ## Usage
-Using the main function `MR_similarity_analysis` generates causal estimates with scatterplot to initially visualise results from multiple selected methods. Test statistics, e.g. $\bar{F}$ statistics, $I^2$ statistics and MR-Egger intercept are provided to investigate potential dissimilarity due to bias.
-Similarity statistics are then applied on overall hypothesis that all methods are similar. Users are allowed to further investigation through pairwise or group-wise copmparisons if dissimilarity is found in overall hypothesis.
+The main function `MR_similarity_analysis` generates causal estimates and a scatterplot to provide an initial visualisation of results obtained from multiple selected methods. Test statistics, including the $\bar{F}$ statistic, $I^2$ statistic, and MR-Egger intercept (p-value), are provided to investigate potential dissimilarity arising from weak instrument bias or horizontal pleiotropy.
+
+Similarity statistics are then applied to test the overall hypothesis that all selected methods produce similar causal estimates. If dissimilarity is detected in the overall hypothesis, users can further investigate the source of variation through pairwise or group-wise comparisons between methods.
+
 An example of using the `MR_similarity_analysis` is demonstrated with a sample summary dataset as follow:
 
 ```
