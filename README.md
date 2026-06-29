@@ -14,7 +14,7 @@ install_github("SiyangCai/MRSimilarity")
 ```
 
 ## Usage
-
+A simple data sample and example of using the main function 'MR_similarity_analysis' us demonstrated as follow:
 
 ```
 library(MRSimilarity)
