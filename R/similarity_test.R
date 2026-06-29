@@ -14,6 +14,7 @@
 #' @param MR.cols Column names that are required for exposure and outcome. If they are not included, this function will generate by itself.
 #' @param methods A list of names of available MR methods that are elements from \code{TwoSampleMR:mr_method_list()}. The default includes
 #' Inverse variance weighted (IVW), MR Egger (MRE), Weighted median (WM), Weighted mode (MBE) and MR GRIP (MG).
+#' @param use_pca_gao Whether to use PCA on scenarios to find significant levels for multiple testing, as an improved method of Bonferroni correction. If using default as FALSE, all significant levels are nominal level of 0.05.
 #' @param seed Random seed for reproducibility.
 #' @param output.M.boot Whether to include the bootstrap estimates matrix in the final output. The default is FALSE.
 #'
@@ -30,7 +31,7 @@
 #'     \item{\code{Q.stats.df} The similarity Q-statistics for all comparison scenarios.}
 #'     \item{\code{Q.pvals.df} The p-values of similarity Q-statistics for all comparison scenarios.}
 #'     \item{\code{Q.pvals.Bonf.df} Whether the similarity Q-statistics are significant on the signifcant level using adjusted Bonferroni.}
-#'     \item{\code{alpha.Bonf} The significant level using adjusted Bonferroni.}
+#'     \item{\code{alpha.Bonf} The final significant level when \code{use_pca_gao} is enabled.}
 #'   }
 #'
 #' @examples
