@@ -13,3 +13,23 @@ library(devtools)
 install_github("SiyangCai/MRSimilarity")
 ```
 
+## Usage
+
+
+```
+library(MRSimilarity)
+
+# Load the sample dataset: LDL-C (exposure) vs. CAD (outcome)
+data(LDL-CAD)
+
+# Perform similarity analysis
+# Recommend using non-parametric bootstrap with a large bootstrap sample
+res = MR_similarity_analysis(data = LDL_CAD,
+                               xlab = "Instrument-LDL-cholesterol effect",
+                               ylab = "Instrument-CAD effect",
+                               title_text = "Causal effect estimates of LDL on CAD",
+                               parametric_bootstrap = FALSE,
+                               n.boot = 10000)
+print(res)
+```
+For more information, please refer to the help page in the R package.
