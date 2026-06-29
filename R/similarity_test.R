@@ -33,6 +33,15 @@
 #'     \item{\code{alpha.Bonf} The significant level using adjusted Bonferroni.}
 #'   }
 #'
+#' @examples
+#' data(LDL_CAD)
+#'
+#' # n.boot = 100 is used here for quick demonstration.
+#' # Increase n.boot for more reliable results in real analyses.
+#' result <- MR_similarity_analysis(LDL_CAD, n.boot = 100)
+#' print(result)
+#'
+#'
 #'
 #' @export
 
@@ -50,6 +59,7 @@ MR_similarity_analysis <- function(data,
                                    methods = c("Inverse variance weighted",
                                                "MR Egger", "Weighted median",
                                                "Weighted mode", "MR GRIP"),
+                                   use_pca_gao = FALSE,
                                    seed = 42,
                                    PC.threshold = 0.99,
                                    output.M.boot = FALSE) {
@@ -346,9 +356,15 @@ MR_similarity_analysis <- function(data,
   rownames(Q.stats.df) <- Q.pvals.names
   colnames(Q.stats.df) <- c("Q statistics")
 
-  Q.pvals.Bonf.df <- data.frame(round(Q.pvals.Bonf, 4))
-  rownames(Q.pvals.Bonf.df) <- Q.pvals.names
-  colnames(Q.pvals.Bonf.df) <- c("Q statistics")
+  if(use_pca_gao == TRUE){
+    Q.pvals.Bonf.df <- data.frame(round(Q.pvals.Bonf, 4))
+    rownames(Q.pvals.Bonf.df) <- Q.pvals.names
+    colnames(Q.pvals.Bonf.df) <- c("Q statistics")
+  }
+  else{
+    Q.pvals.Bonf.df = Q.pvals.df
+    Q.pvals.Bonf.df$`Q statistics` = as.integer(Q.pvals.Bonf.df$`Q statistics` < 0.05)
+  }
 
   # collect test statistics into a single df
   test.stats <- c("Cochran's Q", "Cochran's Q (p)", "Cochran-Rucker diff. (p)",

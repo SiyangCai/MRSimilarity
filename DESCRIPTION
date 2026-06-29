@@ -1,7 +1,7 @@
 Type: Package
 Package: MRSimilarity
 Title: Using Q-statistics to identify significant difference in mulitple causal estimates from Mendelian Randomisation (MR) methods
-Version: 0.1.0
+Version: 1.0.0
 Author: Matthew Tyler, Ninon Mounier, Jack Bowden, Frank Dudbridge, Siyang Cai
 Maintainer: Frank Dudbridge <frank.dudbridge@leicester.ac.uk>, Siyang Cai
     <sc814@leicester.ac.uk>

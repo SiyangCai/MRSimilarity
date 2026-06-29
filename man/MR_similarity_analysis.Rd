@@ -15,6 +15,7 @@ MR_similarity_analysis(
   MR.cols = c("id.exposure", "id.outcome", "exposure", "outcome", "mr_keep"),
   methods = c("Inverse variance weighted", "MR Egger", "Weighted median",
     "Weighted mode", "MR GRIP"),
+  use_pca_gao = FALSE,
   seed = 42,
   PC.threshold = 0.99,
   output.M.boot = FALSE
@@ -61,4 +62,15 @@ A list of results and diagnostics contains:
 \description{
 Given exposure and outcome beta effects, this function calculated the estimates using given listed MR methods from \code{TwoSampleMR} package.
 An overall hypothesis, followed by group-wise comparisons or pair-wise comparisons as multiple testing will be performed.
+}
+\examples{
+data(LDL_CAD)
+
+# n.boot = 100 is used here for quick demonstration.
+# Increase n.boot for more reliable results in real analyses.
+result <- MR_similarity_analysis(LDL_CAD, n.boot = 100)
+print(result)
+
+
+
 }
