@@ -18,5 +18,8 @@ Returns the F bar statistic value.
 Calculate mean F statistic to capture the dilution in the inverse variance weighted estimate for a set of instrument-exposure effects.
 }
 \examples{
-F.bar <- MR_F_bar(beta.exposure = SNP_LDL_assoc, se.exposure = SNP_LDL_assoc_SE)
+F.bar <- MR_F_bar(
+  beta.exposure = LDL_CAD$beta.exposure,
+  se.exposure = LDL_CAD$se.exposure
+)
 }

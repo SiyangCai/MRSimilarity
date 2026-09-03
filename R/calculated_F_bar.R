@@ -8,9 +8,9 @@ MR_F_bar <- function(beta.exposure, se.exposure) {
   #' @return Returns the F bar statistic value.
   #' @export
   #'
-  #' @examples F.bar <- MR_F_bar(beta.exposure = SNP_LDL_assoc, se.exposure = SNP_LDL_assoc_SE)
-
-  # Calculate statistic using the instrument-exposure inputs
-  F.bar <- mean((beta.exposure ^ 2) / se.exposure ^ 2)
-  return(F.bar)
+  #' @examples
+  #' F.bar <- MR_F_bar(
+  #'   beta.exposure = LDL_CAD$beta.exposure,
+  #'   se.exposure = LDL_CAD$se.exposure
+  #' )
 }

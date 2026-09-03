@@ -1,7 +1,3 @@
-#'
-#'@export
-
-
 calculate_similarity_Q_stat <- function(SE,
                                     cor_mat,
                                     M,

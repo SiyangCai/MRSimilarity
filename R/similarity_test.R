@@ -17,7 +17,10 @@
 #' @param use_pca_gao Whether to use PCA on scenarios to find significant levels for multiple testing, as an improved method of Bonferroni correction. If using default as FALSE, all significant levels are nominal level of 0.05.
 #' @param seed Random seed for reproducibility.
 #' @param output.M.boot Whether to include the bootstrap estimates matrix in the final output. The default is FALSE.
+#' @param PC.threshold Cumulative variance threshold used when selecting principal components for the PCA-based multiple testing correction.
 #'
+#'
+#' @importFrom stats cor cov pchisq prcomp rnorm
 #' @import plotly
 #' @import gtools
 #'
@@ -175,14 +178,18 @@ MR_similarity_analysis <- function(data,
   het_stats <- TwoSampleMR::mr_heterogeneity(MR.tab)
 
   # Cochran
-  Cochran.Q <- het_stats$Q[het_stats$method == "Inverse variance weighted"]
-  Cochran.Q.p <- het_stats$Q_pval[het_stats$method == "Inverse variance weighted"]
+  Cochran.Q <- het_stats$Q[het_stats$method == "Inverse variance weighted"][1]
+  Cochran.Q.p <- het_stats$Q_pval[het_stats$method == "Inverse variance weighted"][1]
 
   # Rucker
-  Rucker.Q <- het_stats$Q[het_stats$method == "MR Egger"]
+  Rucker.Q <- het_stats$Q[het_stats$method == "MR Egger"][1]
 
   # difference p-value
-  Q.diff.p <- 1 - pchisq(Cochran.Q - Rucker.Q, 1)
+  Q.diff.p <- if (!is.na(Cochran.Q) && !is.na(Rucker.Q)) {
+    1 - stats::pchisq(Cochran.Q - Rucker.Q, 1)
+  } else {
+    NA_real_
+  }
 
   # dilution statistics
   F.bar <- MR_F_bar(beta.exposure = beta.exposure, se.exposure = se.exposure)
@@ -370,7 +377,22 @@ MR_similarity_analysis <- function(data,
   # collect test statistics into a single df
   test.stats <- c("Cochran's Q", "Cochran's Q (p)", "Cochran-Rucker diff. (p)",
                   "F bar", "I^2_XG", "MR-Egger intercept (p)")
-  values <- rbind(Cochran.Q, Cochran.Q.p, Q.diff.p, F.bar, Isq_XG, Egger.int.p)
+
+  scalar_or_na <- function(x) {
+    if (is.null(x) || length(x) == 0) {
+      return(NA_real_)
+    }
+    as.numeric(x[1])
+  }
+
+  values <- c(
+    scalar_or_na(Cochran.Q),
+    scalar_or_na(Cochran.Q.p),
+    scalar_or_na(Q.diff.p),
+    scalar_or_na(F.bar),
+    scalar_or_na(Isq_XG),
+    scalar_or_na(Egger.int.p)
+  )
   test.stats.df <- data.frame(test.stat = test.stats, value = round(values, 4))
   rownames(test.stats.df) <- NULL
 

@@ -13,9 +13,9 @@ Depends:
     R (>= 3.5)
 Imports: 
     plotly,
-    PBSmodelling,
+    TwoSampleMR,
     gtools,
-    summarytools,
+    stats
 Remotes:
     MRCIEU/TwoSampleMR
 Encoding: UTF-8

@@ -57,5 +57,18 @@ Returns a plotly plot object.
 Plot instrument-exposure effects and instrument-outcome effects (with corresponding 95% confidence intervals). Overlay causal effect estimates as slopes to allow visual inspection of similarity between causal effect estimates.
 }
 \examples{
-SNP.plot <- MR_2s_scatter_auto(beta.exposure = SNP_LDL.beta, beta.outcome = SNP_CHD.beta, se.exposure = SNP_LDL.beta.se, se.outcome = SNP_CHD.beta.se, b = ests.beta, beta.intercepts = c(0, -0.01, 0, 0), title.text = "Causal effect estimates of LDL cholesterol on coronary heart disease risk", xlab = "SNP-LDL effect", ylab = "SNP-CHD effect", methods = c("IVW", "MRE", "WM", "MBE"), xsize = 25, ysize = 25, titlesize = 25)
+data(LDL_CAD)
+
+SNP.plot <- MR_scatter_estimates(
+  beta.exposure = LDL_CAD$beta.exposure,
+  beta.outcome = LDL_CAD$beta.outcome,
+  se.exposure = LDL_CAD$se.exposure,
+  se.outcome = LDL_CAD$se.outcome,
+  b = c(0.5, 0.6),
+  beta.intercepts = c(0, 0),
+  title_text = "Example plot",
+  xlab = "SNP-LDL effect",
+  ylab = "SNP-CAD effect",
+  methods = c("Method 1", "Method 2")
+)
 }

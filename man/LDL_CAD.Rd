@@ -5,14 +5,16 @@
 \alias{LDL_CAD}
 \title{Example dataset}
 \format{
-A data frame with 100 rows and 5 variables:
+A data frame with 100 rows and 8 variables:
 \describe{
   \item{rsID}{SNP identifier}
   \item{beta.exposure}{Beta effect on exposure}
-  \item{beta.outcome}{Beta effect on outcome}
   \item{se.exposure}{Standard error of beta.exposure}
+  \item{beta.outcome}{Beta effect on outcome}
   \item{se.outcome}{Standard error of beta.outcome}
-  \item{mr_keep}{whether to include this instruments to estimate causal effect}
+  \item{id.exposure}{Exposure identifier}
+  \item{id.outcome}{Outcome identifier}
+  \item{mr_keep}{Whether to include this instrument}
 }
 }
 \source{

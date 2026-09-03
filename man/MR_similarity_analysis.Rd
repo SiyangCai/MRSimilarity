@@ -45,6 +45,8 @@ Inverse variance weighted (IVW), MR Egger (MRE), Weighted median (WM), Weighted 
 
 \item{seed}{Random seed for reproducibility.}
 
+\item{PC.threshold}{Cumulative variance threshold used when selecting principal components for the PCA-based multiple testing correction.}
+
 \item{output.M.boot}{Whether to include the bootstrap estimates matrix in the final output. The default is FALSE.}
 }
 \value{
